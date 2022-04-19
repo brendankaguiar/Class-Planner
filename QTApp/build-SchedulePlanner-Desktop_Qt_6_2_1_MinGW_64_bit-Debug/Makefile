@@ -212,7 +212,8 @@ Makefile: ../SchedulePlanner/SchedulePlanner.pro ../../../../QTDev/6.2.1/mingw81
 		../../../../QTDev/6.2.1/mingw81_64/lib/Qt6Gui.prl \
 		../../../../QTDev/6.2.1/mingw81_64/lib/Qt6Core.prl \
 		../../../../QTDev/6.2.1/mingw81_64/lib/Qt6EntryPoint.prl \
-		../../../../QTDev/6.2.1/mingw81_64/mkspecs/features/build_pass.prf
+		../../../../QTDev/6.2.1/mingw81_64/mkspecs/features/build_pass.prf \
+		../SchedulePlanner/Icons.qrc
 	$(QMAKE) -o Makefile ..\SchedulePlanner\SchedulePlanner.pro -spec win32-g++ "CONFIG+=debug" "CONFIG+=qml_debug"
 ../../../../QTDev/6.2.1/mingw81_64/mkspecs/features/spec_pre.prf:
 ../../../../QTDev/6.2.1/mingw81_64/mkspecs/features/device_config.prf:
@@ -357,6 +358,7 @@ Makefile: ../SchedulePlanner/SchedulePlanner.pro ../../../../QTDev/6.2.1/mingw81
 ../../../../QTDev/6.2.1/mingw81_64/lib/Qt6Core.prl:
 ../../../../QTDev/6.2.1/mingw81_64/lib/Qt6EntryPoint.prl:
 ../../../../QTDev/6.2.1/mingw81_64/mkspecs/features/build_pass.prf:
+../SchedulePlanner/Icons.qrc:
 qmake: FORCE
 	@$(QMAKE) -o Makefile ..\SchedulePlanner\SchedulePlanner.pro -spec win32-g++ "CONFIG+=debug" "CONFIG+=qml_debug"
 

@@ -6,6 +6,7 @@ MainWindow::MainWindow(QWidget *parent)
     , ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
+    ui->verticalFrame_12->setToolTip("HEWWO");
 }
 
 MainWindow::~MainWindow()
