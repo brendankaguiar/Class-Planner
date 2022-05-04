@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+   <head>
+      <script src = "https://code.jquery.com/jquery-1.10.2.js"></script>
+      <script src = "https://code.jquery.com/ui/1.10.4/jquery-ui.js"></script>
+      
+      <style>
+        /* Style the overall list style */   
+        [id^="sortable"] 
+        { 
+           list-style-type: none; 
+           margin: 0; 
+           padding: 10; 
+           width: 25%; 
+        }
+
+        /* Style the list items (boxes around class names) */
+        li 
+        { 
+           margin: 0 3px 3px 3px;
+           padding: 40px; 
+           font-size: 17px;
+           height: 16px;
+           width: 50px;
+           color:black;
+           background-color: rgb(177, 177, 177);
+        }
+
+        /* Style the fall semesters */
+        .semester
+           {
+               float: left;
+               padding: 40px;
+               background-color: rgb(195, 218, 236);
+           }
+
+        /* Style the spring semesters */
+        .semester2
+           {
+               float: left;
+               padding: 40px;
+               background-color: rgb(196, 252, 180);
+           }
+      </style>
+      
+      <script>
+         $(function() {
+            $( "#sortable-1" ).sortable();
+         });
+      </script>
+      <script>
+        $(function() {
+           $( "#sortable-2" ).sortable();
+        });
+     </script>
+   </head>
+   
+   <body>
+    <div class="semester"> 
+       <h2>Fall 2022</h2>
+      <ul id = "sortable-1">
+        {% for Schedule1 in Schedule1 %}
+        <li>
+         {{ Schedule1.classID }}
+        </li>
+        {% endfor %}
+      </ul>
+    </div>
+
+    <div class="semester2">
+      <h2>Spring 2022</h2>
+      <ul id = "sortable-2">
+        {% for Schedule2 in Schedule2 %}
+        <li>
+         {{ Schedule2.classID }}
+        </li>
+        {% endfor %}
+      </ul>
+    </div>
+   </body>
+</html>
