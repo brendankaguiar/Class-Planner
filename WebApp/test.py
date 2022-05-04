@@ -82,9 +82,15 @@ class Classes(db.Model):
 def index():
     title = "test"
     classSchedule = Classes.query.all()
-    ScheduleF = Schedule1.query.all()
-    ScheduleS = Schedule2.query.all()
-    return render_template('drag.html', classSchedule=classSchedule, Schedule1=ScheduleF, Schedule2=ScheduleS,  title=title)
+    schedule1 = Schedule1.query.all()
+    schedule2 = Schedule2.query.all()
+    schedule3 = Schedule3.query.all()
+    schedule4 = Schedule4.query.all()
+    schedule5 = Schedule5.query.all()
+    schedule6 = Schedule6.query.all()
+    schedule7 = Schedule7.query.all()
+    schedule8 = Schedule8.query.all()
+    return render_template('drag.html', classSchedule=classSchedule, Schedule1=schedule1, Schedule2=schedule2, Schedule3=schedule3, Schedule4=schedule4,Schedule5=schedule5, Schedule6=schedule6, Schedule7=schedule7, Schedule8=schedule8, title=title)
  
 @app.route("/updateList",methods=["POST","GET"])
 def updateList():
