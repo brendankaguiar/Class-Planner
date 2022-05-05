@@ -1,5 +1,7 @@
+from cgi import test
 import os
-from flask import Flask, render_template, request, jsonify
+import sqlite3
+from flask import Flask, render_template, request
 from flask_sqlalchemy import SQLAlchemy
 
 app = Flask(__name__)
@@ -10,6 +12,56 @@ app.config['SQLALCHEMY_DATABASE_URI'] ='sqlite:///' + os.path.join(filepath, 'cl
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 db = SQLAlchemy(app)
 
+#Set up dictionary to hold semester classes
+
+semModified = [0b00000000]
+scheduleClasses = {
+"sem1Set": set(),
+"sem2Set": set(),
+"sem3Set": set(),
+"sem4Set": set(),
+'sem5Set': set(),
+"sem6Set": set(),
+"sem7Set": set(),
+"sem8Set": set()
+}
+
+#update the scheduleClasses dict with modified classes set that semester as modified to mark that semester needs to be updated in the database
+def updateClasses(postStr, scheduleDict, semModified):
+    x = postStr.index("From")
+    changedSem = postStr[x+5]
+    changedSet = set()
+    x = postStr.find("]'")
+    while x != -1:
+        postStr = postStr[x+5:]
+        x = postStr.index("'")
+        changedSet.add(int(postStr[:x]))
+        x = postStr.find("]'")
+    scheduleDict.update({f"sem{changedSem}Set": changedSet})
+    strMod = "0b1"
+    for num in range(int(changedSem) -1):
+        strMod += "0"
+    semModified[0] = semModified[0] | int(strMod,2)
+
+def pushToDatabase(scheduleClasses, semModified):
+    connection = sqlite3.connect('classes.db')
+    cursor = connection.cursor()
+    modified = str(bin(semModified[0]))
+    count = 1
+    for changed in modified[2:][::-1]:
+        if changed == '1':
+            cursor.execute(f"DELETE FROM Schedule{count}")
+            if len(scheduleClasses[f"sem{count}Set"]) != 0:
+                for classID in scheduleClasses[f"sem{count}Set"]:
+                    cursor.execute(f"INSERT INTO Schedule{count} (classID) VALUES ({classID});")
+                    #print(f"INSERT INTO Schedule{count} (classID) VALUES ({classID});")
+                scheduleClasses.update({f"sem{count}Set": set()})
+        count += 1
+    semModified[0] = 0b0
+    connection.commit()
+
+
+    
 
 
 class Schedule1(db.Model):
@@ -100,7 +152,8 @@ def updateList():
         sentData = None
         sentData = request.form
         dataStr = str(sentData)
-        print(dataStr[22:])
+        updateClasses(dataStr, scheduleClasses, semModified)
+        pushToDatabase(scheduleClasses, semModified)
         return "post"
  
 if __name__ == "__main__":
