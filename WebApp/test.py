@@ -94,7 +94,14 @@ def index():
  
 @app.route("/updateList",methods=["POST","GET"])
 def updateList():
-    return jsonify('Successfully Updated')
+    if request.method == 'GET':
+        return "posting url"
+    if request.method == 'POST':
+        sentData = None
+        sentData = request.form
+        dataStr = str(sentData)
+        print(dataStr[22:])
+        return "post"
  
 if __name__ == "__main__":
     app.run()

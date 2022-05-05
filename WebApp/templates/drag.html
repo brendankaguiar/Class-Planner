@@ -1,135 +1,306 @@
 <!DOCTYPE html>
 <html>
-   <head>
-      <script src = "https://code.jquery.com/jquery-1.10.2.js"></script>
-      <script src = "https://code.jquery.com/ui/1.10.4/jquery-ui.js"></script>
-      
-      <style>
-        /* Style the overall list style */   
-        [id^="sortable"] 
-        { 
-           list-style-type: none; 
-           margin: 0; 
-           padding: 10; 
-           width: 25%;
-           min-height: 200px;
-           min-width: 150px;
+
+<head>
+  <script src="https://code.jquery.com/jquery-1.10.2.js"></script>
+  <script src="https://code.jquery.com/ui/1.10.4/jquery-ui.js"></script>
+
+  <style>
+    /* Style the overall list style */
+    [id^="sortable"] {
+      list-style-type: none;
+      margin: 0;
+      padding: 10;
+      width: 25%;
+      min-height: 200px;
+      min-width: 150px;
+    }
+
+    /* Style the list items (boxes around class names) */
+    li {
+      margin: 10px 0px 0px 0px;
+      padding: 40px;
+      font-size: 17px;
+      height: 16px;
+      width: 50px;
+      color: black;
+      background-color: rgb(177, 177, 177);
+    }
+
+    /* Style the fall semesters */
+    .semester {
+      border: 1px solid black;
+      border-top-style: none;
+      border-bottom-style: none;
+      display: table-cell;
+      padding: 40px;
+      background-color: rgb(195, 218, 236);
+    }
+
+    /* Style the spring semesters */
+    .semester2 {
+      border: 1px solid black;
+      border-top-style: none;
+      border-bottom-style: none;
+      display: table-cell;
+      padding: 40px;
+      background-color: rgb(196, 252, 180);
+    }
+
+    #DivBig {
+      overflow-x: scroll;
+      white-space: no-wrap;
+    }
+
+    /* Style the placeholder element */
+    .ui-state-highlight {
+      background-color: rgb(226, 217, 96);
+    }
+  </style>
+  <script>
+    $(function () {
+      $("#sortable-1").sortable({
+        connectWith: ".connectedSortable",
+        placeholder: "ui-state-highlight",
+        
+        /* Post any change to the schedule */
+        update: function(event, ui) 
+        {
+          var newData = $(this).sortable('serialize');
+          newData = "From 1 " + newData;
+          setTimeout(() => {
+          $.ajax
+          ({
+              data: newData,
+              type: 'POST',
+              url: "/updateList",
+              success: function(data, textStatus)
+              {
+                console.log("post from 1 success")
+              },
+              error: function(data, textStatus, errorThrown)
+              {
+                console.log("post from 1 fail")
+              }
+          }); }, 1);
         }
+      }).disableSelection();
+    });
 
-        /* Style the list items (boxes around class names) */
-        li 
-        { 
-           margin: 10px 0px 0px 0px;
-           padding: 40px; 
-           font-size: 17px;
-           height: 16px;
-           width: 50px;
-           color:black;
-           background-color: rgb(177, 177, 177);
+    $(function () {
+      $("#sortable-2").sortable({
+        connectWith: ".connectedSortable",
+        placeholder: "ui-state-highlight",
+        
+        /* Post any change to the schedule */
+        update: function(event, ui) 
+        {
+          var newData = $(this).sortable('serialize');
+          newData = "From 2 " + newData;
+          setTimeout(() => {
+          $.ajax
+          ({
+              data: newData,
+              type: 'POST',
+              url: "/updateList",
+              success: function(data, textStatus)
+              {
+                console.log("post from 2 success")
+              },
+              error: function(data, textStatus, errorThrown)
+              {
+                console.log("post from 2 fail")
+              }
+            }); }, 2);
         }
+      }).disableSelection();
+    });
 
-        /* Style the fall semesters */
-        .semester
-           {
-               border: 1px solid black;
-               border-top-style: none;
-               border-bottom-style: none;
-               display:table-cell;
-               padding: 40px;
-               background-color: rgb(195, 218, 236);
-           }
+    $(function () {
+      $("#sortable-3").sortable({
+        connectWith: ".connectedSortable",
+        placeholder: "ui-state-highlight",
+        
+        /* Post any change to the schedule */
+        update: function(event, ui) 
+        {
+          var newData = $(this).sortable('serialize');
+          newData = "From 3 " + newData;
+          setTimeout(() => {
+          $.ajax
+          ({
+              data: newData,
+              type: 'POST',
+              url: "/updateList",
+              success: function(data, textStatus)
+              {
+                console.log("post from 3 success")
+              },
+              error: function(data, textStatus, errorThrown)
+              {
+                console.log("post from 3 fail")
+              }
+            }); }, 3);
+        }
+      }).disableSelection();
+    });
 
-        /* Style the spring semesters */
-        .semester2
-           {
-               border: 1px solid black;
-               border-top-style: none;
-               border-bottom-style: none;
-               display:table-cell;
-               padding: 40px;
-               background-color: rgb(196, 252, 180);
-           }
-         
-         #DivBig
-         {
-            overflow-x: scroll;
-            white-space:no-wrap;
-         }
-         /* Style the placeholder element */ 
-         .ui-state-highlight 
-         { 
-            background-color: rgb(226, 217, 96);
-         } 
-      </style> 
-      <script>
-         $( function() {
-    $( "#sortable-1" ).sortable({
-      connectWith: ".connectedSortable",
-      placeholder: "ui-state-highlight"
-    }).disableSelection();
-  } );
+    $(function () {
+      $("#sortable-4").sortable({
+        connectWith: ".connectedSortable",
+        placeholder: "ui-state-highlight",
+        
+        /* Post any change to the schedule */
+        update: function(event, ui) 
+        {
+          var newData = $(this).sortable('serialize');
+          newData = "From 4 " + newData;
+          setTimeout(() => {
+          $.ajax
+          ({
+              data: newData,
+              type: 'POST',
+              url: "/updateList",
+              success: function(data, textStatus)
+              {
+                console.log("post from 4 success")
+              },
+              error: function(data, textStatus, errorThrown)
+              {
+                console.log("post from 4 fail")
+              }
+            }); }, 4);
+        }
+      }).disableSelection();
+    });
 
-        $( function() {
-    $( "#sortable-2" ).sortable({
-      connectWith: ".connectedSortable",
-      placeholder: "ui-state-highlight"
-    }).disableSelection();
-  } );
+    $(function () {
+      $("#sortable-5").sortable({
+        connectWith: ".connectedSortable",
+        placeholder: "ui-state-highlight",
+        
+        /* Post any change to the schedule */
+        update: function(event, ui) 
+        {
+          var newData = $(this).sortable('serialize');
+          newData = "From 5 " + newData;
+          setTimeout(() => {
+          $.ajax
+          ({
+              data: newData,
+              type: 'POST',
+              url: "/updateList",
+              success: function(data, textStatus)
+              {
+                console.log("post from 5 success")
+              },
+              error: function(data, textStatus, errorThrown)
+              {
+                console.log("post from 5 fail")
+              }
+            }); }, 5);
+        }
+      }).disableSelection();
+    });
 
-  $( function() {
-    $( "#sortable-3" ).sortable({
-      connectWith: ".connectedSortable",
-      placeholder: "ui-state-highlight"
-    }).disableSelection();
-  } );
+    $(function () {
+      $("#sortable-6").sortable({
+        connectWith: ".connectedSortable",
+        placeholder: "ui-state-highlight",
+        
+        /* Post any change to the schedule */
+        update: function(event, ui) 
+        {
+          var newData = $(this).sortable('serialize');
+          newData = "From 6" + newData;
+          setTimeout(() => {
+          $.ajax
+          ({
+              data: newData,
+              type: 'POST',
+              url: "/updateList",
+              success: function(data, textStatus)
+              {
+                console.log("post from 6 success")
+              },
+              error: function(data, textStatus, errorThrown)
+              {
+                console.log("post from 6 fail")
+              }
+            }); }, 6);
+        }
+      }).disableSelection();
+    });
 
-        $( function() {
-    $( "#sortable-4" ).sortable({
-      connectWith: ".connectedSortable",
-      placeholder: "ui-state-highlight"
-    }).disableSelection();
-  } );
+    $(function () {
+      $("#sortable-7").sortable({
+        connectWith: ".connectedSortable",
+        placeholder: "ui-state-highlight",
+        
+        /* Post any change to the schedule */
+        update: function(event, ui) 
+        {
+          var newData = $(this).sortable('serialize');
+          newData = "From 7 " + newData;
+          setTimeout(() => {
+          $.ajax
+          ({
+              data: newData,
+              type: 'POST',
+              url: "/updateList",
+              success: function(data, textStatus)
+              {
+                console.log("post from 7 success")
+              },
+              error: function(data, textStatus, errorThrown)
+              {
+                console.log("post from 7 fail")
+              }
+            }); }, 7);
+        }
+      }).disableSelection();
+    });
 
-  $( function() {
-    $( "#sortable-5" ).sortable({
-      connectWith: ".connectedSortable",
-      placeholder: "ui-state-highlight"
-    }).disableSelection();
-  } );
+    $(function () {
+      $("#sortable-8").sortable({
+        connectWith: ".connectedSortable",
+        placeholder: "ui-state-highlight",
+        
+        /* Post any change to the schedule */
+        update: function(event, ui) 
+        {
+          var newData = $(this).sortable('serialize');
+          newData = "From 8 " + newData;
+          $.ajax
+          ({
+              data: newData,
+              type: 'POST',
+              url: "/updateList",
+              success: function(data, textStatus)
+              {
+                console.log("post from 8 success")
+              },
+              error: function(data, textStatus, errorThrown)
+              {
+                console.log("post from 8 fail")
+              }
+          });
+        }
+      }).disableSelection();
+    });
+  </script>
 
-        $( function() {
-    $( "#sortable-6" ).sortable({
-      connectWith: ".connectedSortable",
-      placeholder: "ui-state-highlight"
-    }).disableSelection();
-  } );
 
-  $( function() {
-    $( "#sortable-7" ).sortable({
-      connectWith: ".connectedSortable",
-      placeholder: "ui-state-highlight"
-    }).disableSelection();
-  } );
+</head>
 
-        $( function() {
-    $( "#sortable-8" ).sortable({
-      connectWith: ".connectedSortable",
-      placeholder: "ui-state-highlight"
-    }).disableSelection();
-  } );
-     </script>
-
-
-   </head>
-   
-   <body>
-    <div id="DivBig">
-    <div class="semester"> 
-       <h2>Fall 2022</h2>
-      <ul id = "sortable-1" class="connectedSortable">
+<body>
+  <div id="DivBig">
+    <div class="semester">
+      <h2>Fall 2022</h2>
+      <ul id="sortable-1" class="connectedSortable">
         {% for Schedule1 in Schedule1 %}
-        <li>
-         {{ Schedule1.classID }}
+        <li id="sem1_{{loop.index}}">
+          {{ Schedule1.classID }}
         </li>
         {% endfor %}
       </ul>
@@ -137,82 +308,83 @@
 
     <div class="semester2">
       <h2>Spring 2023</h2>
-      <ul id = "sortable-2" class="connectedSortable">
+      <ul id="sortable-2" class="connectedSortable">
         {% for Schedule2 in Schedule2 %}
-        <li>
-         {{ Schedule2.classID }}
+        <li id="sem2_{{loop.index}}">
+          {{ Schedule2.classID }}
         </li>
         {% endfor %}
       </ul>
     </div>
 
-    <div class="semester"> 
+    <div class="semester">
       <h2>Fall 2023</h2>
-     <ul id = "sortable-3" class="connectedSortable">
-       {% for Schedule3 in Schedule3 %}
-       <li>
-        {{ Schedule3.classID }}
-       </li>
-       {% endfor %}
-     </ul>
-   </div>
-
-   <div class="semester2">
-     <h2>Spring 2024</h2>
-     <ul id = "sortable-4" class="connectedSortable">
-       {% for Schedule4 in Schedule4 %}
-       <li>
-        {{ Schedule4.classID }}
-       </li>
-       {% endfor %}
-     </ul>
-   </div>
-
-   <div class="semester"> 
-      <h2>Fall 2024</h2>
-     <ul id = "sortable-5" class="connectedSortable">
-       {% for Schedule5 in Schedule5 %}
-       <li>
-        {{ Schedule5.classID }}
-       </li>
-       {% endfor %}
-     </ul>
-   </div>
-
-   <div class="semester2">
-     <h2>Spring 2025</h2>
-     <ul id = "sortable-6" class="connectedSortable">
-       {% for Schedule6 in Schedule6 %}
-       <li>
-        {{ Schedule6.classID }}
-       </li>
-       {% endfor %}
-     </ul>
-   </div>
-
-   <div class="semester"> 
-      <h2>Fall 2025</h2>
-     <ul id = "sortable-7" class="connectedSortable">
-       {% for Schedule7 in Schedule7 %}
-       <li>
-        {{ Schedule7.classID }}
-       </li>
-       {% endfor %}
-     </ul>
-   </div>
-
-   <div class="semester2">
-     <h2>Spring 2026</h2>
-     <ul id = "sortable-8" class="connectedSortable">
-       {% for Schedule8 in Schedule8 %}
-       <li>
-        {{ Schedule8.classID }}
-       </li>
-       {% endfor %}
-     </ul>
-   </div>
+      <ul id="sortable-3" class="connectedSortable">
+        {% for Schedule3 in Schedule3 %}
+        <li id="sem3_{{loop.index}}">
+          {{ Schedule3.classID }}
+        </li>
+        {% endfor %}
+      </ul>
     </div>
 
+    <div class="semester2">
+      <h2>Spring 2024</h2>
+      <ul id="sortable-4" class="connectedSortable">
+        {% for Schedule4 in Schedule4 %}
+        <li id="sem4_{{loop.index}}">
+          {{ Schedule4.classID }}
+        </li>
+        {% endfor %}
+      </ul>
+    </div>
 
-   </body>
+    <div class="semester">
+      <h2>Fall 2024</h2>
+      <ul id="sortable-5" class="connectedSortable">
+        {% for Schedule5 in Schedule5 %}
+        <li id="sem5_{{loop.index}}">
+          {{ Schedule5.classID }}
+        </li>
+        {% endfor %}
+      </ul>
+    </div>
+
+    <div class="semester2">
+      <h2>Spring 2025</h2>
+      <ul id="sortable-6" class="connectedSortable">
+        {% for Schedule6 in Schedule6 %}
+        <li id="sem6_{{loop.index}}">
+          {{ Schedule6.classID }}
+        </li>
+        {% endfor %}
+      </ul>
+    </div>
+
+    <div class="semester">
+      <h2>Fall 2025</h2>
+      <ul id="sortable-7" class="connectedSortable">
+        {% for Schedule7 in Schedule7 %}
+        <li id="sem7_{{loop.index}}">
+          {{ Schedule7.classID }}
+        </li>
+        {% endfor %}
+      </ul>
+    </div>
+
+    <div class="semester2">
+      <h2>Spring 2026</h2>
+      <ul id="sortable-8" class="connectedSortable">
+        {% for Schedule8 in Schedule8 %}
+        <li id="sem8_{{loop.index}}">
+          {{ Schedule8.classID }}
+        </li>
+        {% endfor %}
+      </ul>
+    </div>
+  </div>
+
+
+</body>
+
 </html>
