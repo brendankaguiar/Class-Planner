@@ -26,6 +26,7 @@ scheduleClasses = {
 "sem8Set": set()
 }
 
+
 #update the scheduleClasses dict with modified classes set that semester as modified to mark that semester needs to be updated in the database
 def updateClasses(postStr, scheduleDict, semModified):
     x = postStr.index("From")
@@ -43,7 +44,15 @@ def updateClasses(postStr, scheduleDict, semModified):
         strMod += "0"
     semModified[0] = semModified[0] | int(strMod,2)
 
+
+
+dbLock = False
 def pushToDatabase(scheduleClasses, semModified):
+    global dbLock
+    ph = 0
+    while dbLock == True:
+       ph = 0 
+    dbLock = True    
     connection = sqlite3.connect('classes.db')
     cursor = connection.cursor()
     modified = str(bin(semModified[0]))
@@ -59,6 +68,7 @@ def pushToDatabase(scheduleClasses, semModified):
         count += 1
     semModified[0] = 0b0
     connection.commit()
+    dbLock = False
 
 
     
@@ -152,6 +162,7 @@ def updateList():
         sentData = None
         sentData = request.form
         dataStr = str(sentData)
+        print(dataStr)
         updateClasses(dataStr, scheduleClasses, semModified)
         pushToDatabase(scheduleClasses, semModified)
         return "post"

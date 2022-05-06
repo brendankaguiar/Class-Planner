@@ -18,8 +18,48 @@
       min-width: 150px;
     }
 
+    #header 
+    {
+      background-color: rgb(4,30,66);
+      color: rgb(230, 230, 230);
+      font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+      margin: 0;
+      padding-left: 70px;
+      top: 0;
+      padding: 0;
+      margin-bottom: 0;
+      width: 100%;
+      height: 8vh;
+    }
+
+    #footer 
+    {
+      background-color: rgb(99, 137, 189);
+      color: rgb(230, 230, 230);
+      font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+      margin: 0;
+      padding-left: 70px;
+      top: 0;
+      margin-bottom: 0;
+      width: 100vw;
+      height: 7vh;
+    }
+
     /* Style the list items (boxes around class names) */
-    li {
+
+    li{
+      margin: 10px 0px 0px 0px;
+      padding: 40px;
+      font-size: 17px;
+      height: 16px;
+      width: 50px;
+      border: 1px solid black;
+      border-radius: 1px;
+      color: black;
+      background-color: rgb(177, 177, 177);
+    }
+
+    li[id$="inc"] {
       margin: 10px 0px 0px 0px;
       padding: 40px;
       font-size: 17px;
@@ -29,14 +69,28 @@
       background-color: rgb(177, 177, 177);
     }
 
+    li[id$="com"] {
+      margin: 10px 0px 0px 0px;
+      padding: 40px;
+      font-size: 17px;
+      height: 16px;
+      width: 50px;
+      color: black;
+      background-color: rgb(162, 231, 173);
+    }
+
     /* Style the fall semesters */
     .semester {
       border: 1px solid black;
       border-top-style: none;
       border-bottom-style: none;
       display: table-cell;
+      float: left;
       padding: 40px;
       background-color: rgb(195, 218, 236);
+      min-height: 90%;
+      min-width: 9%;
+      white-space: nowrap
     }
 
     /* Style the spring semesters */
@@ -45,13 +99,18 @@
       border-top-style: none;
       border-bottom-style: none;
       display: table-cell;
+      float: left;
       padding: 40px;
       background-color: rgb(196, 252, 180);
+      min-height: 90%;
+      min-width: 9%;
+      white-space: nowrap
     }
 
     #DivBig {
-      overflow-x: scroll;
       white-space: no-wrap;
+      width: 100vw;
+      height: 80vh;
     }
 
     /* Style the placeholder element */
@@ -69,6 +128,7 @@
         update: function(event, ui) 
         {
           var newData = $(this).sortable('serialize');
+          console.log(this)
           newData = "From 1 " + newData;
           setTimeout(() => {
           $.ajax
@@ -84,7 +144,7 @@
               {
                 console.log("post from 1 fail")
               }
-          }); }, 1);
+          }); }, 10);
         }
       }).disableSelection();
     });
@@ -98,6 +158,7 @@
         update: function(event, ui) 
         {
           var newData = $(this).sortable('serialize');
+          console.log(this)
           newData = "From 2 " + newData;
           setTimeout(() => {
           $.ajax
@@ -113,7 +174,7 @@
               {
                 console.log("post from 2 fail")
               }
-            }); }, 2);
+            }); }, 20);
         }
       }).disableSelection();
     });
@@ -142,7 +203,7 @@
               {
                 console.log("post from 3 fail")
               }
-            }); }, 3);
+            }); }, 30);
         }
       }).disableSelection();
     });
@@ -171,7 +232,7 @@
               {
                 console.log("post from 4 fail")
               }
-            }); }, 4);
+            }); }, 40);
         }
       }).disableSelection();
     });
@@ -200,7 +261,7 @@
               {
                 console.log("post from 5 fail")
               }
-            }); }, 5);
+            }); }, 50);
         }
       }).disableSelection();
     });
@@ -229,7 +290,7 @@
               {
                 console.log("post from 6 fail")
               }
-            }); }, 6);
+            }); }, 60);
         }
       }).disableSelection();
     });
@@ -258,7 +319,7 @@
               {
                 console.log("post from 7 fail")
               }
-            }); }, 7);
+            }); }, 70);
         }
       }).disableSelection();
     });
@@ -293,13 +354,18 @@
 
     function toggleFunction(cb)
     {
-      if(cb.slice(-5) === 'Check')
+      
+      if(cb.slice(-3) === 'off')
       {
-        document.getElementById(cd.slice(0,-5)).id = cd.slice(0,-4)
+        /* Once button is toggled on */
+        document.getElementById(cb.slice(0,-3).concat("inc")).id = cb.slice(0,-3).concat("com")
+        document.getElementById(cb).id = cb.slice(0,-3).concat("on")
       }
       else
       {
-        document.getElementById(cd).id = cd.slice(0,-1)
+        /* Once button is toggled off */
+        document.getElementById(cb.slice(0,-2).concat("com")).id = cb.slice(0,-2).concat("inc")
+        document.getElementById(cb).id = cb.slice(0,-2).concat("off")
       }
     }
   </script>
@@ -308,18 +374,17 @@
 </head>
 
 <body>
+  <div id="header">
+  <h1>UNR CLASS PLANNER</h1>
+</div>
   <div id="DivBig">
     <div class="semester">
       <h2>Fall 2022</h2>
       <ul id="sortable-1" class="connectedSortable">
         {% for Schedule1 in Schedule1 %}
-        <div id="classGroup">
-        <li id="sem1_{{loop.index}}">
+        <li id="sem1_{{Schedule1.classID}}">
           {{ Schedule1.classID }}
         </li>
-        <label for="checkbox">Complete?</label>
-        <input type="checkbox" name="checkbox" id="sem1_{{loop.index}}Check" onchange ="toggleFunction(this.id);">
-      </div>
         {% endfor %}
       </ul>
     </div>
@@ -328,7 +393,7 @@
       <h2>Spring 2023</h2>
       <ul id="sortable-2" class="connectedSortable">
         {% for Schedule2 in Schedule2 %}
-        <li id="sem2_{{loop.index}}">
+        <li id="sem2_{{Schedule2.classID}}">
           {{ Schedule2.classID }}
         </li>
         {% endfor %}
@@ -339,7 +404,7 @@
       <h2>Fall 2023</h2>
       <ul id="sortable-3" class="connectedSortable">
         {% for Schedule3 in Schedule3 %}
-        <li id="sem3_{{loop.index}}">
+        <li id="sem3_{{Schedule3.classID}}">
           {{ Schedule3.classID }}
         </li>
         {% endfor %}
@@ -350,7 +415,7 @@
       <h2>Spring 2024</h2>
       <ul id="sortable-4" class="connectedSortable">
         {% for Schedule4 in Schedule4 %}
-        <li id="sem4_{{loop.index}}">
+        <li id="sem4_{{Schedule4.classID}}">
           {{ Schedule4.classID }}
         </li>
         {% endfor %}
@@ -361,7 +426,7 @@
       <h2>Fall 2024</h2>
       <ul id="sortable-5" class="connectedSortable">
         {% for Schedule5 in Schedule5 %}
-        <li id="sem5_{{loop.index}}">
+        <li id="sem5_{{Schedule5.classID}}">
           {{ Schedule5.classID }}
         </li>
         {% endfor %}
@@ -372,7 +437,7 @@
       <h2>Spring 2025</h2>
       <ul id="sortable-6" class="connectedSortable">
         {% for Schedule6 in Schedule6 %}
-        <li id="sem6_{{loop.index}}">
+        <li id="sem6_{{Schedule6.classID}}">
           {{ Schedule6.classID }}
         </li>
         {% endfor %}
@@ -383,7 +448,7 @@
       <h2>Fall 2025</h2>
       <ul id="sortable-7" class="connectedSortable">
         {% for Schedule7 in Schedule7 %}
-        <li id="sem7_{{loop.index}}">
+        <li id="sem7_{{Schedule7.classID}}">
           {{ Schedule7.classID }}
         </li>
         {% endfor %}
@@ -394,14 +459,14 @@
       <h2>Spring 2026</h2>
       <ul id="sortable-8" class="connectedSortable">
         {% for Schedule8 in Schedule8 %}
-        <li id="sem8_{{loop.index}}">
+        <li id="sem8_{{Schedule8.classID}}">
           {{ Schedule8.classID }}
         </li>
         {% endfor %}
       </ul>
     </div>
   </div>
-
+<div id="footer"></div>
 
 </body>
 
