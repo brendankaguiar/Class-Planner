@@ -4,6 +4,8 @@
 <head>
   <script src="https://code.jquery.com/jquery-1.10.2.js"></script>
   <script src="https://code.jquery.com/ui/1.10.4/jquery-ui.js"></script>
+  <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+  <script src="https://code.jquery.com/ui/1.13.1/jquery-ui.js"></script>
 
   <style>
     /* Style the overall list style */
@@ -288,6 +290,18 @@
         }
       }).disableSelection();
     });
+
+    function toggleFunction(cb)
+    {
+      if(cb.slice(-5) === 'Check')
+      {
+        document.getElementById(cd.slice(0,-5)).id = cd.slice(0,-4)
+      }
+      else
+      {
+        document.getElementById(cd).id = cd.slice(0,-1)
+      }
+    }
   </script>
 
 
@@ -299,9 +313,13 @@
       <h2>Fall 2022</h2>
       <ul id="sortable-1" class="connectedSortable">
         {% for Schedule1 in Schedule1 %}
+        <div id="classGroup">
         <li id="sem1_{{loop.index}}">
           {{ Schedule1.classID }}
         </li>
+        <label for="checkbox">Complete?</label>
+        <input type="checkbox" name="checkbox" id="sem1_{{loop.index}}Check" onchange ="toggleFunction(this.id);">
+      </div>
         {% endfor %}
       </ul>
     </div>
