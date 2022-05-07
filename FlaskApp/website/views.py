@@ -4,6 +4,8 @@ from flask_login import login_required, current_user
 from .models import Course, Transcript
 from . import db
 import json
+f = open('Class-Planner/FlaskApp/website/courses.json')
+data = json.load(f)
 views = Blueprint('views', __name__)
 @views.route('/', methods = ['GET', 'POST'])#home page decorator and route
 @login_required#cannot get to homepage unless logged in
@@ -25,7 +27,7 @@ def home():#render home page
             )
         db.session.add(new_Course)
         db.session.commit()
-    return render_template("home.html",user=current_user)#user can be used in templates to reference user 
+    return render_template("home.html",user=current_user, jsonCourses=data)#user can be used in templates to reference user 
 @views.route('/delete-Course',methods = ['POST'])
 def delete_Course():
     Course = json.loads(request.data)
@@ -36,3 +38,4 @@ def delete_Course():
             db.session.delete(Course)
             db.session.commit()
             return jsonify({})
+
