@@ -12,22 +12,40 @@
       </tr>
     </thead>
     <tbody>
-    {% for note in user.notes%} 
-      <tr>
-        <td>{{note.data}}</td>
-        <td>Otto</td>
-        <td>@mdo</td>
-        <td><button type ="button" class = "close" onClick="deleteNote({{note.id}})">
-            <span aria-hidden="true">&times;</span>
-        </button></td>
-      </tr>
-    {%endfor%}
+    
     </tbody>
   </table>
+</br>
 <form method="POST">
-    <textarea name = "note" id = "note" class = "form-control"></textarea>
+  <div class="dropdown">
+    <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+      Select Course
+    </button>
+    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+      {%for v in jsonCourses%}
+        <a class="dropdown-item" name="Name" id="Name">{{v}}</a>
+      {%endfor%}
+    </div>
+  </div>
     <div align="center">
         <button type="submit" class="btn btn-primary">Add Course</button>
     </div>
 </form>
+</br>
+<h1 align = "center">Courses Taken</h1>
+<br/>
+<table class="table">
+    <thead class="thead-dark">   
+      <tr>
+        <th scope="col">Course Name</th>
+        <th scope="col">Credits</th>
+        <th scope="col">GPA Earned</th>
+        <th scope="col">Term</th>
+      </tr>
+    </thead>
+    <tbody>
+    
+    </tbody>
+  </table>
+</br>
 {%endblock%}
