@@ -77,6 +77,7 @@ def pushToDatabase(scheduleClasses, semModified):
 class Schedule1(db.Model):
     order = db.Column(db.Integer, primary_key=True, autoincrement='auto', nullable=False, unique=True)
     classID = db.Column(db.Integer, nullable=False)
+    className = db.Column(db.String(200))
 
     def __repr__(self):
         return '<classID %r>' % self.classID
@@ -84,6 +85,7 @@ class Schedule1(db.Model):
 class Schedule2(db.Model):
     order = db.Column(db.Integer, primary_key=True, autoincrement='auto', nullable=False, unique=True)
     classID = db.Column(db.Integer, nullable=False)
+    className = db.Column(db.String(200))
 
     def __repr__(self):
         return '<classID %r>' % self.classID        
@@ -91,6 +93,7 @@ class Schedule2(db.Model):
 class Schedule3(db.Model):
     order = db.Column(db.Integer, primary_key=True, autoincrement='auto', nullable=False, unique=True)
     classID = db.Column(db.Integer, nullable=False)
+    className = db.Column(db.String(200))
 
     def __repr__(self):
         return '<classID %r>' % self.classID
@@ -98,10 +101,12 @@ class Schedule3(db.Model):
 class Schedule4(db.Model):
     order = db.Column(db.Integer, primary_key=True, autoincrement='auto', nullable=False, unique=True)
     classID = db.Column(db.Integer, nullable=False)
+    className = db.Column(db.String(200))
 
 class Schedule5(db.Model):
     order = db.Column(db.Integer, primary_key=True, autoincrement='auto', nullable=False, unique=True)
     classID = db.Column(db.Integer, nullable=False)
+    className = db.Column(db.String(200))
 
     def __repr__(self):
         return '<classID %r>' % self.classID
@@ -109,6 +114,7 @@ class Schedule5(db.Model):
 class Schedule6(db.Model):
     order = db.Column(db.Integer, primary_key=True, autoincrement='auto', nullable=False, unique=True)
     classID = db.Column(db.Integer, nullable=False)
+    className = db.Column(db.String(200))
 
     def __repr__(self):
         return '<classID %r>' % self.classID        
@@ -116,6 +122,7 @@ class Schedule6(db.Model):
 class Schedule7(db.Model):
     order = db.Column(db.Integer, primary_key=True, autoincrement='auto', nullable=False, unique=True)
     classID = db.Column(db.Integer, nullable=False)
+    className = db.Column(db.String(200))
 
     def __repr__(self):
         return '<classID %r>' % self.classID
@@ -123,6 +130,7 @@ class Schedule7(db.Model):
 class Schedule8(db.Model):
     order = db.Column(db.Integer, primary_key=True, autoincrement='auto', nullable=False, unique=True)
     classID = db.Column(db.Integer, nullable=False)
+    className = db.Column(db.String(200))
 
     def __repr__(self):
         return '<classID %r>' % self.classID   
