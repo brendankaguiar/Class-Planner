@@ -6,6 +6,8 @@
   <script src="https://code.jquery.com/ui/1.10.4/jquery-ui.js"></script>
   <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
   <script src="https://code.jquery.com/ui/1.13.1/jquery-ui.js"></script>
+  <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+  <script src="https://code.jquery.com/ui/1.13.1/jquery-ui.js"></script>
 
   <style>
     /* Style the overall list style */
@@ -40,9 +42,18 @@
       margin: 0;
       padding-left: 70px;
       top: 0;
+      display: absolute;
       margin-bottom: 0;
       width: 100vw;
       height: 7vh;
+    }
+
+    #classDialog
+    {
+      background-color: rgb(226, 226, 226);
+      border: 1px solid black;
+      border-radius: 2px;
+      display: absolute;
     }
 
     /* Style the list items (boxes around class names) */
@@ -368,12 +379,35 @@
         document.getElementById(cb).id = cb.slice(0,-2).concat("off")
       }
     }
+
+    $( function() {
+    var dialog
+    dialog = $( "#classDialog" ).dialog({
+      autoOpen: false,
+      height: 400,
+      width: 350,
+      modal: true
+    });
+ 
+    $( "#classInfo" ).button().on( "click", function() {
+      dialog.dialog( "open" );
+    });
+  } );
+
+
   </script>
 
 
 </head>
 
 <body>
+
+<div id="classDialog">
+  <h3>Class Name here</h3>
+  <p> Class info here</p>
+</div>
+
+
   <div id="header">
   <h1>UNR CLASS PLANNER</h1>
 </div>
@@ -459,9 +493,14 @@
       <h2>Spring 2026</h2>
       <ul id="sortable-8" class="connectedSortable">
         {% for Schedule8 in Schedule8 %}
-        <li id="sem8_{{Schedule8.classID}}">
+        <div id = "classDiv">
+        <li id="sem8_{{Schedule8.classID}}inc">
           {{ Schedule8.classID }}
         </li>
+      <input type = "checkbox" id = "sem8_{{Schedule8.classID}}off" onclick="toggleFunction(this.id)" >
+      <label for = "sem8_{{Schedule8.classID}}">Complete?</label>
+      <button id = "classInfo" name = "classInfo"> More Info </button>
+      </div>
         {% endfor %}
       </ul>
     </div>
